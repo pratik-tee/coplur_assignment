@@ -1,3 +1,4 @@
+#To check number is palindrome or not
 num=int(input("Enter a number"))
 number=num
 result=0
