@@ -1,7 +1,7 @@
 import requests
 import json
-def weather(city):
-    url=f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid=966ef49f4dd5066506988f5892b4bfc9&units=metric"
+def weather(city,api_id):
+    url=f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_id}&units=metric"
     try:
         response=requests.get(url)
         response.raise_for_status()
@@ -30,4 +30,5 @@ def weather(city):
     except requests.exceptions.RequestException as e:
         print("error fetching error data: {e}")
 city=input("Enter city name:")
-weather(city)
+api_id=input("Enter api id")
+weather(city,api_id)
