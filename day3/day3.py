@@ -1,4 +1,4 @@
-'''
+
 d={1:'alice',2:'bob',3:'ani',4:{1:'pratik',2:'tinwal'}}
 d[5]='archit'
 print(d[3])
@@ -76,7 +76,7 @@ print(s6)
 s7=s5.intersection(s6)
 print(s7)
 
-'''
+
 #Function
 def my_fun(name):
     print(name,"pratik tinwal")

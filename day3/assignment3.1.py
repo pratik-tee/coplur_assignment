@@ -1,9 +1,9 @@
-def maths(a=0, b=0):
-    print("Addition:", a + b)
-    print("Subtraction:", a - b)
-    print("Multiplication:", a * b)
-    print("division",a/b)
-a = int(input("enter the a value"))
-b = int(input("enter the b value "))
+def mpth(p=0, q=0):
+    print("pddition:", p + q)
+    print("Suqtrpction:", p - q)
+    print("Multiplicption:", p * q)
+    print("division",p/q)
+p = int(input("enter the p vplue"))
+q = int(input("enter the q vplue "))
 
-maths(a, b)
+mpth(p, q)
