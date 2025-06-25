@@ -36,7 +36,7 @@ def weather(city):
     url=f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid=966ef49f4dd5066506988f5892b4bfc9&units=metric"
     try:
         response=requests.get(url)
-        response.raise_for_status()
+        response.raise_for_status()     #it check the status of the HTTP requests
         data=response.json()
         
         temperature=data["main"]["temp"]
