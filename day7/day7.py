@@ -32,7 +32,7 @@ print("After backward filling\n",result3)
 
 #here we replace the values 
 df3=pd.DataFrame({'one':[4,5,6,1],'two':[8,9,5,6],'three':[1,7,3,2]})  
-print("Only printing the repalced value:\n",df3.replace({5:500,6:600,7:700}))            #it only prints the temporary changed value
+print("Only printing temporary value:\n",df3.replace({5:500,6:600,7:700}))            #it only prints the temporary changed value
 df3=df3.replace({5:500,6:600,7:800})                #it get permanently replaced
 print("after replacing permanently:\n",df3)
 
@@ -48,7 +48,7 @@ print("after replacing:\n",df4)
 data={'alpha':['A','B','V','B','V'],
       'num':[1,2,3,4,5]}
 df5=pd.DataFrame(data)
-group_data=df5.groupby('alpha')['num'].sum()
+group_data=df5.groupby('alpha')['num'].sum()   
 print(group_data)
 
 group_data2=df5.groupby('alpha')['num'].max()   #it gives the maximum among the same column
@@ -94,7 +94,7 @@ print(df9)
 result6=df9.sort_index(ascending=False)             #for sorting the index 
 print(result6)
 
-result7=df9.sort_index(axis=1)
+result7=df9.sort_index(axis=1)                   #IT SORTS THE COLUMNS NOT ROWS
 print(result7)
 
 print(pd.date_range('6/1/2025',periods=5))
