@@ -72,7 +72,7 @@ print("el:",a13[-1,-1,-3])
 
 #slicing in array
 print("k",a11[1:4])      #slicing in 1d array
-print(a11[::2])
+print("d",a11[::2])
 
 print(a12[1,1:3])
 

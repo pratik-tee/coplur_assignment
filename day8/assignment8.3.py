@@ -30,5 +30,10 @@ float_a4=a4.astype(float)
 print(float_a4)
 
 
+arr=np.array([7,8,9],dtype=float)
+print(arr)
+
+
+
 
 
