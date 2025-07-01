@@ -88,8 +88,8 @@ print("sum  is",a9.sum(1))              # and if we pass 1 then it get sum of al
    
 print(np.sqrt(a9))                    #to find sqrt of an whole array
 
-a=np.array([[1,2,3],[4,5,6]])                    
-b=np.array([[56,755,32],[43,56,32]])
+a=np.array([[1,2],[4,5]])                    
+b=np.array([[56,755],[43,56]])
 print(a+b)                               #performing mathematical operation
 print(a-b)                                   #both should be of same length
 print(a*b)
@@ -97,8 +97,8 @@ print(a/b)
 
 print(a.shape)
 print(b.shape)
-#x=a.dot(b)
-#print(x)
+x=a.dot(b)
+print("dot operation is ",x)
 
 a10=np.array([1,2,3])
 padd=np.pad(a10,pad_width=2,mode='constant')
@@ -107,8 +107,10 @@ print("padded array",padd)
 transposed=np.transpose(a)              #to tansposed rows into columns
 print(transposed)
 
-c=np.array([[1,2,3],[4,6,3]])              #to concatenate two array
-d=np.array([[6,67,7],[4,53,2]])
+c=np.array([[1,2,3],
+            [4,6,3]])              #to concatenate two array
+d=np.array([[6,67,7],
+            [4,53,2]])
 
 res=np.concatenate((c,d),axis=1)
 print("concatenation is",res)
@@ -125,7 +127,7 @@ f=np.resize(e,(3,2))
 print(f)
 
 print(np.append(e,[7,8,9]))
-print(np.append(e,[[7,8,9]],axis=0))
+print("a",np.append(e,[[7,8,9]],axis=0))
 
 print(np.insert(e,3,[11,12]))
 
