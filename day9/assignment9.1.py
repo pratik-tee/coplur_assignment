@@ -33,6 +33,13 @@ for x in a2:
         sum+=y
 print("sum is :",sum)
 
+a=np.array([[1,2,3],[4,5,6]])                    
+b=np.array([[56,755,32],[43,56,32]])
+print("addition is ",a+b)                               #performing mathematical operation
+print("subtraction is",a-b)                                   #both should be of same length
+print("multiplication is ",a*b)
+print("dividation is ",a/b)
+
 
 
 

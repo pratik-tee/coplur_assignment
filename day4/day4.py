@@ -1,5 +1,5 @@
 
-'''import csv
+import csv
 data=[
     ["name","age","country"],
     ["ram",23,"usa"],
@@ -52,7 +52,7 @@ def weather(city):
         print("error fetching error data: {e}")
 city=input("Enter city name:")
 weather(city)
-'''
+
 #sqlite
 import sqlite3
 conn=sqlite3.connect("db1.db")

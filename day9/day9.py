@@ -127,7 +127,7 @@ f=np.resize(e,(3,2))
 print(f)
 
 print(np.append(e,[7,8,9]))
-print("a",np.append(e,[[7,8,9]],axis=0))
+print("a:",np.append(e,[[7,8,9]],axis=0))
 
 print(np.insert(e,3,[11,12]))
 
