@@ -1,0 +1,38 @@
+layers = ["raw", "curated", "presentation"]
+tables = {"raw": {}, "curated": {}, "presentation": {}}
+
+for x in df14.collect():
+    
+    raw_table = x["RawTableName"]
+    raw_col = x["RawColName"]
+    raw_dtype = x["RawDataType"]
+    if raw_table and raw_col and raw_dtype:
+        if raw_table not in tables["raw"]:
+            tables["raw"][raw_table] = []
+        tables["raw"][raw_table].append((raw_col, raw_dtype))
+    
+    
+    curated_table = x["CuratedTableName"]
+    curated_col = x["CuratedColName"]
+    curated_dtype = x["CuratedDataType"]
+    if curated_table and curated_col and curated_dtype:
+        if curated_table not in tables["curated"]:
+            tables["curated"][curated_table] = []
+        tables["curated"][curated_table].append((curated_col, curated_dtype))
+    
+ 
+    pres_table = x["PresentationTableName"]
+    pres_col = x["PresentationColName"]
+    pres_dtype = x["PresentationDataType"]
+    if pres_table and pres_col and pres_dtype:
+        if pres_table not in tables["presentation"]:
+            tables["presentation"][pres_table] = []
+        tables["presentation"][pres_table].append((pres_col, pres_dtype))
+
+
+for layer in layers:
+    spark.sql(f"CREATE DATABASE IF NOT EXISTS {layer}")
+    for table_name, columns in tables[layer].items():
+        schema_str = ", ".join([f"`{col}` {dtype.upper()}" for col, dtype in columns])
+        spark.sql(f"CREATE OR REPLACE TABLE {layer}.{table_name} ({schema_str}) USING DELTA")
+        print(f" Created table {layer}.{table_name} with schema: {schema_str}")

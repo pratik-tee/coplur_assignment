@@ -111,8 +111,6 @@ select s.customer_id ,sum( if (m.product_name='sushi',m.price*10*2,m.price*10)) 
 Q10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
 
 
-
-
 SELECT 
   s.customer_id,
   SUM(
