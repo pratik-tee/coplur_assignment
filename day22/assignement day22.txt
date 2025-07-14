@@ -1,0 +1,54 @@
+1.  Data Ingestion:
+     
+    df=spark.read.csv("/Volumes/workspace/skit_training/sales_volume/salesdata.csv",header=True,inferSchema=True)
+display(df)
+
+
+2.  Data Exploration:
+
+     df_exploration=df.show(2)
+     display(df_exploration)
+
+
+
+3.  Data Filtering:
+
+
+    df_filtered=df.filter(df.SALES>1000)
+    df_selected=df_filtered.select("SALES")
+    display(df_selected)
+
+
+4.  Select Relevant Columns:
+
+     df_unique_select=df.select(("ORDERNUMBER"),("SALES"),("QUANTITYORDERED"),("ORDERLINENUMBER"),("ORDERDATE"),("STATUS"))
+display(df_unique_select)
+
+
+5.  Delta Table Management:
+
+    df_unique_select.write.format("delta").mode("append").saveAsTable("skit_training.sales_attrition")
+df_history=spark.sql("DESCRIBE HISTORY skit_training.sales_attrition")
+display(df_history)
+%sql
+truncate table skit_training.sales_attrition
+
+
+6. Version Control:
+    
+    
+version_number=0
+df_specific_version=spark.read.format("delta").option("versionAsOf",version_number).table("skit_training.sales_attrition")
+display(df_specific_version)
+
+delta_df=spark.read.format("delta"),table("skit_training.sales_attrition")
+display(delta_df)
+
+
+
+7.  Advanced Transformation:
+    
+
+   df_transformed=df.filter((df.Attrition=='Yes')&(df.JobSatisfaction<3)).select("EmployeeNumber","Age","Department","JobRole","MonthlyIncome","JobSatisfaction","Attrition")
+df_transformed.write.format("delta").mode("overwrite").partitionBy("Department").save("/Volumes/workspace/skit_training/transformed_data/emp_attrition")
+     
