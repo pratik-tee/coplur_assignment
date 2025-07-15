@@ -1,0 +1,66 @@
+dbutils.widgets.text("Date","")
+input_name=dbutils.widgets.get("Date")
+print(input_name)
+
+
+
+df=spark.read.csv(f"/Volumes/workspace/scd/day23/bookings/bookings_{input_name}.csv", header=True, inferSchema=True)
+display(df)
+
+
+
+df2=spark.read.csv(f"/Volumes/workspace/scd/day23/customers/customers_{input_name}.csv", header=True, inferSchema=True)
+display(df2)
+
+
+
+dbutils.fs.ls("/Volumes/workspace/scd/day23/bookings/")
+
+
+SPARK_VERSION=3.2
+%pip install git+https://github.com/awslabs/python-deequ.git 
+
+
+import os
+os.environ['SPARK_VERSION'] ="3.3"
+from pyspark.sql.functions import col,lit,current_timestamp,sum as _sum
+from delta.tables import DeltaTable
+from pydeequ.checks import Check, CheckLevel
+from pydeequ.verification import VerificationSuite, VerificationResult
+
+
+def remove_null(df,col_name):
+ return df.filter(col(col_name).isNull())
+ 
+
+df3=remove_null(df2,"phone_number")
+display(df3)
+
+
+def remove_null(df,col_name): 
+ return df.filter(col(col_name).isNotNull())
+ 
+
+df3=remove_null(df,"booking_id")
+df4=remove_null(df3,"customer_id")
+df5=remove_null(df4,"amount")
+display(df5)
+df5.write.format("delta").mode("append").saveAsTable("scd.bookings2_filtered")
+
+
+
+
+
+current_df = spark.table("scd.bookings_filtered")
+display(current_df)
+
+
+
+
+current2_df = spark.table("scd.bookings2_filtered")
+display(current2_df)
+
+
+
+merge_df = current_df.join(current2_df, on="booking_id", how="left")  
+display(merge_df)
