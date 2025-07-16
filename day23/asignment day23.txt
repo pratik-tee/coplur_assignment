@@ -62,5 +62,17 @@ display(current2_df)
 
 
 
-merge_df = current_df.join(current2_df, on="booking_id", how="left")  
-display(merge_df)
+from delta.tables import DeltaTable
+
+delta_table = DeltaTable.forName(spark, "scd.bookings_filtered")
+
+
+delta_table.alias("target").merge(
+    source=current2_df.alias("source"),
+    condition="target.booking_id = source.booking_id"
+).whenMatchedUpdateAll(
+).whenNotMatchedInsertAll(
+).execute()
+
+delta_df = delta_table.toDF()
+display(delta_df)
